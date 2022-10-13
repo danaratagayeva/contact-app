@@ -14,6 +14,7 @@ class AddContact extends Component {
             <label>Email</label>
             <input type='email' name='email' placeholder='Email' />
           </div>
+          <button className='ui button blue'>Add</button>
         </form>
       </div>
     );
