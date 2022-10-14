@@ -5,8 +5,10 @@ const ContactList = (props) => {
   console.log(props);
   //const { contacts } = props;
 
+  const deleteContactHandler
+
   const renderContactList = props.contacts.map((contact) => {
-    return <ContactCard key={contact.id} contact={contact}></ContactCard>;
+    return <ContactCard key={contact.id} contact={contact} clickHandler={deleteContactHandler} ></ContactCard>;
   });
   return <div className="ui celled list">{renderContactList}</div>;
 };
