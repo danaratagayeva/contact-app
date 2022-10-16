@@ -26,7 +26,16 @@ const ContactList = (props) => {
       ></ContactCard>
     );
   });
-  return <div className="ui celled list">{renderContactList}</div>;
+  return (
+    <div className="main">
+      <h2>
+        {" "}
+        AContact List
+        <button className="ui button blue right">Add Contact</button>
+      </h2>
+      <div className="ui celled list">{renderContactList}</div>;
+    </div>
+  );
 };
 
 export default ContactList;
