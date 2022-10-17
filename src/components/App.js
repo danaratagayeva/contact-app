@@ -54,7 +54,7 @@ function App() {
             <ContactList
               {...props}
               contacts={contacts}
-              getContactId={removeContactHandler}
+              onDelete={removeContactHandler}
             />
           )}
         />

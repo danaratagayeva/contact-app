@@ -5,10 +5,16 @@ import user from "../images/user.png";
 import DeleteModal from "./DeleteModal";
 
 const ContactCard = (props) => {
-  const { id, name, email, clickHandler } = props.contact;
+  const { id, name, email } = props.contact;
+  const { onDelete } = props;
 
   const [showModal, setShowModal] = useState(false);
 
+  function toggleModel() {
+    setShowModal((prevState) => !prevState);
+  }
+
+  console.log(showModal);
   return (
     <div className="item">
       <img className="ui avatar image" src={user} alt="user" />
@@ -24,17 +30,19 @@ const ContactCard = (props) => {
       <i
         className="trash alternate outline icon"
         style={{ color: "red", marginTop: "7px" }}
-        onClick={() => setShowModal(true)}
-      >
+        onClick={toggleModel}
+      ></i>
+
+      <div>
         {showModal && (
           <DeleteModal
-            {...props}
             id={id}
             name={name}
-            clickHandler={clickHandler}
+            onDelete={onDelete}
+            toggleModel={toggleModel}
           />
         )}
-      </i>
+      </div>
     </div>
   );
 };
