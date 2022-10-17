@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AddContact extends Component {
   state = {
@@ -46,6 +47,7 @@ class AddContact extends Component {
             />
           </div>
           <button className="ui button blue">Add</button>
+          <Link to="/">Back</Link>
         </form>
       </div>
     );
