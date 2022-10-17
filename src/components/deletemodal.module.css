@@ -11,11 +11,6 @@
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.header {
-  font-size: 1rem;
-  color: black;
-}
-
 /* Modal Content/Box */
 .modalContent {
   background-color: #fefefe;

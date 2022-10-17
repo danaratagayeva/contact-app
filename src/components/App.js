@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import api from "../api/contacts";
 import "./App.css";
 import Header from "./Header";
 import ContactList from "./ContactList";
@@ -12,6 +13,11 @@ function App() {
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []
   );
+
+  //RetrieveContacts
+  const retrieveContacts = () => {
+    const response = api.get("/contacts");
+  };
 
   const addContactHandler = (contact) => {
     setContacts([...contacts, { id: uuidv4(), ...contact }]);
@@ -25,12 +31,11 @@ function App() {
   };
 
   useEffect(() => {
-    const retrieveContacts = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY)
-    );
-    console.log(retrieveContacts);
-
-    setContacts(retrieveContacts);
+    // const retrieveContacts = JSON.parse(
+    //   localStorage.getItem(LOCAL_STORAGE_KEY)
+    // );
+    // console.log(retrieveContacts);
+    // setContacts(retrieveContacts);
   }, []);
 
   useEffect(() => {
