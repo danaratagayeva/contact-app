@@ -40,9 +40,12 @@ function App() {
     <div className="ui container">
       <Header />
       <Switch>
-        <Route path="/add">
-          <AddContact addContactHandler={addContactHandler} />
-        </Route>
+        <Route
+          path="/add"
+          render={(props) => (
+            <AddContact {...props} addContactHandler={addContactHandler} />
+          )}
+        />
         <Route
           path="/"
           exact
