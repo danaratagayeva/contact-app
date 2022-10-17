@@ -15,12 +15,18 @@ function App() {
   );
 
   //RetrieveContacts
-  const retrieveContacts = () => {
-    const response = api.get("/contacts");
+  const retrieveContacts = async () => {
+    const response = await api.get("/contacts");
+    return response.data;
   };
 
-  const addContactHandler = (contact) => {
-    setContacts([...contacts, { id: uuidv4(), ...contact }]);
+  const addContactHandler = async (contact) => {
+    const request = {
+      id: uuidv4(),
+      ...contact,
+    };
+    const response = await api.post("/contacts", request);
+    setContacts([...contacts, response.data]);
   };
 
   const removeContactHandler = (id) => {
@@ -31,15 +37,20 @@ function App() {
   };
 
   useEffect(() => {
+    const getAllContacts = async () => {
+      const allContacts = await retrieveContacts();
+      if (allContacts) setContacts(allContacts);
+    };
     // const retrieveContacts = JSON.parse(
     //   localStorage.getItem(LOCAL_STORAGE_KEY)
     // );
     // console.log(retrieveContacts);
     // setContacts(retrieveContacts);
+    getAllContacts();
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
   return (
