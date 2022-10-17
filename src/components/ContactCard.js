@@ -1,9 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import user from "../images/user.png";
+import DeleteModal from "./DeleteModal";
 
 const ContactCard = (props) => {
-  const { id, name, email } = props.contact;
+  const { id, name, email, clickHandler } = props.contact;
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="item">
@@ -16,11 +20,21 @@ const ContactCard = (props) => {
           <div>{email}</div>
         </Link>
       </div>
+
       <i
         className="trash alternate outline icon"
         style={{ color: "red", marginTop: "7px" }}
-        onClick={() => props.clickHandler(id)}
-      ></i>
+        onClick={() => setShowModal(true)}
+      >
+        {showModal && (
+          <DeleteModal
+            {...props}
+            id={id}
+            name={name}
+            clickHandler={clickHandler}
+          />
+        )}
+      </i>
     </div>
   );
 };
