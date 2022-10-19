@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import api from "../api/contacts";
 import "./App.css";
@@ -86,37 +86,40 @@ function App() {
   return (
     <div className="ui container">
       <Header />
-      <Switch>
+      <Routes>
         <Route
           path="/add"
-          render={(props) => (
-            <AddContact {...props} addContactHandler={addContactHandler} />
-          )}
+          element={<AddContact />}
+          // render={(props) => (
+          //   <AddContact {...props} addContactHandler={addContactHandler} />
+          // )}
         />
         <Route
           path="/edit"
-          render={(props) => (
-            <UpdateContact
-              {...props}
-              updateContactHandler={updateContactHandler}
-            />
-          )}
+          element={<UpdateContact />}
+          // render={(props) => (
+          //   <UpdateContact
+          //     {...props}
+          //     updateContactHandler={updateContactHandler}
+          //   />
+          // )}
         />
         <Route
           path="/"
           exact
-          render={(props) => (
-            <ContactList
-              {...props}
-              contacts={searchTerm.length < 1 ? contacts : searchResults}
-              onDelete={removeContactHandler}
-              term={searchTerm}
-              searchKeyword={searchHandler}
-            />
-          )}
+          element={<ContactList />}
+          // render={(props) => (
+          //   <ContactList
+          //     {...props}
+          //     contacts={searchTerm.length < 1 ? contacts : searchResults}
+          //     onDelete={removeContactHandler}
+          //     term={searchTerm}
+          //     searchKeyword={searchHandler}
+          //   />
+          // )}
         />
-        <Route path="/contact/:id" component={ContactDetail} />
-      </Switch>
+        <Route path="/contact/:id" element={<ContactDetail />} />
+      </Routes>
       {/* <AddContact addContactHandler={addContactHandler} />
       <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
     </div>
