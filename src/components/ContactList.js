@@ -8,10 +8,6 @@ const ContactList = (props) => {
   const inputEl = useRef("");
   //const { onDelete, term } = props;
 
-  //   const deleteContactHandler = (id) => {
-  //     props.getContactId(id);
-  //   };
-
   useEffect(() => {
     retrieveContacts();
   }, []);

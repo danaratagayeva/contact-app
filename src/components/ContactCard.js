@@ -3,8 +3,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import user from "../images/user.png";
 import DeleteModal from "./DeleteModal";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
 const ContactCard = (props) => {
+  const { removeContactHandler } = useContactsCrud();
+
+  const deleteContact = (id) => {
+    removeContactHandler(id);
+  };
+
   const { id, name, email } = props.contact;
   const { onDelete } = props;
 
@@ -29,7 +36,8 @@ const ContactCard = (props) => {
       <i
         className="trash alternate outline icon"
         style={{ color: "red", marginTop: "7px", marginLeft: "10px" }}
-        onClick={toggleModel}
+        onClick={() => deleteContact(id)}
+        //onClick={toggleModel}
       ></i>
 
       <div>
