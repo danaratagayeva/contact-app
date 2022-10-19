@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import api from "../api/contacts";
 import "./App.css";
@@ -60,47 +60,16 @@ function App() {
     }
   };
 
-  // useEffect(() => {
-  //   const getAllContacts = async (id) => {
-  //     //await api.delete(`/contacts/${id}`);
-  //     const allContacts = await retrieveContacts();
-  //     if (allContacts) setContacts(allContacts);
-  //   };
-  //   // const retrieveContacts = JSON.parse(
-  //   //   localStorage.getItem(LOCAL_STORAGE_KEY)
-  //   // );
-  //   // console.log(retrieveContacts);
-  //   // setContacts(retrieveContacts);
-  //   getAllContacts();
-  // }, []);
-
   useEffect(() => {
     // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
   return (
     <div className="ui container">
-      <Router>
+      <BrowserRouter>
         <Header />
         <ContactsCrudContextProvider>
           <Routes>
-            <Route
-              path="/add"
-              element={<AddContact />}
-              // render={(props) => (
-              //   <AddContact {...props} addContactHandler={addContactHandler} />
-              // )}
-            />
-            <Route
-              path="/edit"
-              element={<UpdateContact />}
-              // render={(props) => (
-              //   <UpdateContact
-              //     {...props}
-              //     updateContactHandler={updateContactHandler}
-              //   />
-              // )}
-            />
             <Route
               path="/"
               exact
@@ -115,12 +84,32 @@ function App() {
               //   />
               // )}
             />
+
+            <Route
+              path="/add"
+              element={<AddContact />}
+              // render={(props) => (
+              //   <AddContact {...props} addContactHandler={addContactHandler} />
+              // )}
+            />
+
+            <Route
+              path="/edit"
+              element={<UpdateContact />}
+              // render={(props) => (
+              //   <UpdateContact
+              //     {...props}
+              //     updateContactHandler={updateContactHandler}
+              //   />
+              // )}
+            />
+
             <Route path="/contact/:id" element={<ContactDetail />} />
           </Routes>
         </ContactsCrudContextProvider>
         {/* <AddContact addContactHandler={addContactHandler} />
       <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

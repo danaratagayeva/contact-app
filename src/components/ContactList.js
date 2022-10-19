@@ -6,7 +6,7 @@ import { useContactsCrud } from "../context/ContactsCrudContext.js";
 const ContactList = (props) => {
   const { contacts, retrieveContacts } = useContactsCrud();
   const inputEl = useRef("");
-  const { contacts, onDelete, term } = props;
+  //const { onDelete, term } = props;
 
   //   const deleteContactHandler = (id) => {
   //     props.getContactId(id);
@@ -17,13 +17,13 @@ const ContactList = (props) => {
   }, []);
 
   const renderContactList =
-    contacts !== undefined &&
+    // contacts !== undefined &&
     contacts.map((contact) => {
       return (
         <ContactCard
           key={contact.id}
           contact={contact}
-          onDelete={onDelete}
+          //onDelete={onDelete}
         ></ContactCard>
       );
     });
@@ -47,8 +47,8 @@ const ContactList = (props) => {
             ref={inputEl}
             placeholder="Search Contact"
             className="prompt"
-            value={term}
-            onChange={getSearchTerm}
+            // value={term}
+            // onChange={getSearchTerm}
           />
           <i className="search icon"></i>
         </div>

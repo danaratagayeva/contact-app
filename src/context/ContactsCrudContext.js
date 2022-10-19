@@ -3,7 +3,7 @@ import api from "../api/contacts";
 
 const ContactsCrudContext = createContext();
 
-export function ContactsCrudContextProvider(children) {
+export function ContactsCrudContextProvider({ children }) {
   const [contacts, setContacts] = useState([]);
 
   //RetrieveContacts
@@ -17,12 +17,12 @@ export function ContactsCrudContextProvider(children) {
     retrieveContacts,
   };
   return (
-    <contactsCrudContext.Provider value={value}>
+    <ContactsCrudContext.Provider value={value}>
       {children}
-    </contactsCrudContext.Provider>
+    </ContactsCrudContext.Provider>
   );
 }
 
 export function useContactsCrud() {
-  return useContext(contactsCrudContext);
+  return useContext(ContactsCrudContext);
 }
