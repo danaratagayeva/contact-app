@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import api from "../api/contacts";
 import "./App.css";
@@ -8,18 +8,13 @@ import ContactList from "./ContactList";
 import AddContact from "./AddContact";
 import ContactDetail from "./ContactDetail";
 import UpdateContact from "./UpdateContact";
+import { ContactsCrudContextProvider } from "../context/ContactsCrudContext";
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-  //RetrieveContacts
-  const retrieveContacts = async () => {
-    const response = await api.get("/contacts");
-    return response.data;
-  };
 
   const addContactHandler = async (contact) => {
     const request = {
@@ -65,19 +60,19 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const getAllContacts = async (id) => {
-      //await api.delete(`/contacts/${id}`);
-      const allContacts = await retrieveContacts();
-      if (allContacts) setContacts(allContacts);
-    };
-    // const retrieveContacts = JSON.parse(
-    //   localStorage.getItem(LOCAL_STORAGE_KEY)
-    // );
-    // console.log(retrieveContacts);
-    // setContacts(retrieveContacts);
-    getAllContacts();
-  }, []);
+  // useEffect(() => {
+  //   const getAllContacts = async (id) => {
+  //     //await api.delete(`/contacts/${id}`);
+  //     const allContacts = await retrieveContacts();
+  //     if (allContacts) setContacts(allContacts);
+  //   };
+  //   // const retrieveContacts = JSON.parse(
+  //   //   localStorage.getItem(LOCAL_STORAGE_KEY)
+  //   // );
+  //   // console.log(retrieveContacts);
+  //   // setContacts(retrieveContacts);
+  //   getAllContacts();
+  // }, []);
 
   useEffect(() => {
     // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
@@ -85,73 +80,49 @@ function App() {
 
   return (
     <div className="ui container">
-      <Header />
-      <Routes>
-        <Route
-          path="/add"
-          element={<AddContact />}
-          // render={(props) => (
-          //   <AddContact {...props} addContactHandler={addContactHandler} />
-          // )}
-        />
-        <Route
-          path="/edit"
-          element={<UpdateContact />}
-          // render={(props) => (
-          //   <UpdateContact
-          //     {...props}
-          //     updateContactHandler={updateContactHandler}
-          //   />
-          // )}
-        />
-        <Route
-          path="/"
-          exact
-          element={<ContactList />}
-          // render={(props) => (
-          //   <ContactList
-          //     {...props}
-          //     contacts={searchTerm.length < 1 ? contacts : searchResults}
-          //     onDelete={removeContactHandler}
-          //     term={searchTerm}
-          //     searchKeyword={searchHandler}
-          //   />
-          // )}
-        />
-        <Route path="/contact/:id" element={<ContactDetail />} />
-      </Routes>
-      {/* <AddContact addContactHandler={addContactHandler} />
+      <Router>
+        <Header />
+        <ContactsCrudContextProvider>
+          <Routes>
+            <Route
+              path="/add"
+              element={<AddContact />}
+              // render={(props) => (
+              //   <AddContact {...props} addContactHandler={addContactHandler} />
+              // )}
+            />
+            <Route
+              path="/edit"
+              element={<UpdateContact />}
+              // render={(props) => (
+              //   <UpdateContact
+              //     {...props}
+              //     updateContactHandler={updateContactHandler}
+              //   />
+              // )}
+            />
+            <Route
+              path="/"
+              exact
+              element={<ContactList />}
+              // render={(props) => (
+              //   <ContactList
+              //     {...props}
+              //     contacts={searchTerm.length < 1 ? contacts : searchResults}
+              //     onDelete={removeContactHandler}
+              //     term={searchTerm}
+              //     searchKeyword={searchHandler}
+              //   />
+              // )}
+            />
+            <Route path="/contact/:id" element={<ContactDetail />} />
+          </Routes>
+        </ContactsCrudContextProvider>
+        {/* <AddContact addContactHandler={addContactHandler} />
       <ContactList contacts={contacts} getContactId={removeContactHandler} /> */}
+      </Router>
     </div>
   );
 }
 
 export default App;
-
-// const contacts = [
-//   {
-//     id: "1",
-//     name: "Danara",
-//     email: "danara.tagayeva@gmail.com",
-//   },
-//   {
-//     id: "2",
-//     name: "Sandibek",
-//     email: "sandibek@gmail.com",
-//   },
-//   {
-//     id: "3",
-//     name: "Ismail",
-//     email: "ismail.ibraimov@gmail.com",
-//   },
-//   {
-//     id: "4",
-//     name: "Ilyas",
-//     email: "ilyas.ibraimov@gmail.com",
-//   },
-//   {
-//     id: "5",
-//     name: "Muhammad",
-//     email: "muhammad.ibraimov@gmail.com",
-//   },
-// ];

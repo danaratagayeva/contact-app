@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../api/contacts";
 
 const ContactsCrudContext = createContext();
@@ -9,11 +9,12 @@ export function ContactsCrudContextProvider(children) {
   //RetrieveContacts
   const retrieveContacts = async () => {
     const response = await api.get("/contacts");
-    return response.data;
+    if (response.data) setContacts(response.data);
   };
 
   const value = {
     contacts,
+    retrieveContacts,
   };
   return (
     <contactsCrudContext.Provider value={value}>

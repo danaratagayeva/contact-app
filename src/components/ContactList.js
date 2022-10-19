@@ -1,14 +1,20 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import ContactCard from "./ContactCard.js";
 import { Link } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext.js";
 
 const ContactList = (props) => {
+  const { contacts, retrieveContacts } = useContactsCrud();
   const inputEl = useRef("");
   const { contacts, onDelete, term } = props;
 
   //   const deleteContactHandler = (id) => {
   //     props.getContactId(id);
   //   };
+
+  useEffect(() => {
+    retrieveContacts();
+  }, []);
 
   const renderContactList =
     contacts !== undefined &&
