@@ -17,7 +17,6 @@ const UpdateContact = () => {
       alert("All the fields are mandotary!");
       return;
     }
-
     updateContactHandler({ name: newName, email: newEmail });
     setNewName("");
     setNewEmail("");

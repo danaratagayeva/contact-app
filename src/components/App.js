@@ -11,29 +11,7 @@ import UpdateContact from "./UpdateContact";
 import { ContactsCrudContextProvider } from "../context/ContactsCrudContext";
 
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState();
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-  const searchHandler = (searchTerm) => {
-    setSearchTerm(searchTerm);
-    if (searchTerm !== "") {
-      const newContactList = contacts.filter((contact) => {
-        return Object.values(contact)
-          .join(" ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
-      });
-      setSearchResults(newContactList);
-    } else {
-      setSearchResults(contacts);
-    }
-  };
-
-  useEffect(() => {
-    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-  }, [contacts]);
 
   return (
     <div className="ui container">
