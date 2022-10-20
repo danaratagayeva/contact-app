@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import api from "../api/contacts";
 
 const ContactsCrudContext = createContext();
@@ -20,11 +21,22 @@ export function ContactsCrudContextProvider({ children }) {
     });
     setContacts(newContactList);
   };
+  //Add contacts
+  const addContactHandler = async (contact) => {
+    const request = {
+      id: uuidv4(),
+      ...contact,
+    };
+    const response = await api.post("/contacts", request);
+    console.log(contact);
+    setContacts([...contacts, response.data]);
+  };
 
   const value = {
     contacts,
     retrieveContacts,
     removeContactHandler,
+    addContactHandler,
   };
   return (
     <ContactsCrudContext.Provider value={value}>
