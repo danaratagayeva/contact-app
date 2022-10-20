@@ -16,16 +16,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const addContactHandler = async (contact) => {
-    const request = {
-      id: uuidv4(),
-      ...contact,
-    };
-    const response = await api.post("/contacts", request);
-    console.log(contact);
-    setContacts([...contacts, response.data]);
-  };
-
   const updateContactHandler = async (contact) => {
     const response = await api.put(`/contacts/${contact.id}`, contact);
     console.log(response);
