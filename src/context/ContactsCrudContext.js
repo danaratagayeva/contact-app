@@ -36,6 +36,7 @@ export function ContactsCrudContextProvider({ children }) {
 
   //Update contacts
   const updateContactHandler = async (contact) => {
+    console.log(contact);
     const response = await api.put(`/contacts/${contact.id}`, contact);
     const { id } = response.data;
     setContacts(
