@@ -51,7 +51,7 @@ const ContactCard = (props) => {
         )}
       </div>
 
-      <Link to={`/contacts/${id}`} state={{ contact: props.contact }}>
+      <Link to={`/edit/${id}`} state={{ contact: props.contact }}>
         <i
           className="edit alternate outline icon"
           style={{ color: "blue", marginTop: "7px" }}
